@@ -32,6 +32,9 @@ jobs:
           output_location: "" # Built app content directory - optional
           api_build_command: 'rm -rf ./node_modules/@next/swc-* && rm -rf ./.next/cache'
           ###### End of Repository/Build Configurations ######
+        env:
+          NEXT_PUBLIC_AZURE_OPENAI_API_KEY: ${{ secrets.NEXT_PUBLIC_AZURE_OPENAI_API_KEY }}
+          NEXT_PUBLIC_AZURE_OPENAI_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_AZURE_OPENAI_API_ENDPOINT }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
