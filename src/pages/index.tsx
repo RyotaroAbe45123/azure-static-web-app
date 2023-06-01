@@ -30,7 +30,6 @@ const montserrat = Montserrat({
 });
 
 export default function Home() {
-  console.log(`env: ${process.env.NAME}`)
   const { viewer } = useContext(ViewerContext);
 
   const [systemPrompt, setSystemPrompt] = useState(SYSTEM_PROMPT);
@@ -202,7 +201,7 @@ export default function Home() {
   return (
     <div className={`${m_plus_2.variable} ${montserrat.variable}`}>
       <Meta />
-      <Introduction openAiKey={openAiKey} onChangeAiKey={setOpenAiKey} />
+      {/* <Introduction openAiKey={openAiKey} onChangeAiKey={setOpenAiKey} /> */}
       <VrmViewer />
       <MessageInputContainer
         isChatProcessing={chatProcessing}
