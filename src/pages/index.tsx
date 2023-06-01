@@ -10,7 +10,7 @@ import { speakCharacter } from "@/features/messages/speakCharacter";
 import { MessageInputContainer } from "@/components/messageInputContainer";
 import { SYSTEM_PROMPT } from "@/features/constants/systemPromptConstants";
 import { KoeiroParam, DEFAULT_PARAM } from "@/features/constants/koeiroParam";
-import { getChatResponseStream } from "@/features/chat/openAiChat";
+import { getChatResponseStream } from "@/features/chat/azureOpenAiChat";
 import { M_PLUS_2, Montserrat } from "next/font/google";
 import { Introduction } from "@/components/introduction";
 import { Menu } from "@/components/menu";
@@ -35,6 +35,8 @@ export default function Home() {
 
   const [systemPrompt, setSystemPrompt] = useState(SYSTEM_PROMPT);
   const [openAiKey, setOpenAiKey] = useState("");
+  const aoaiKey = process.env.NEXT_PUBLIC_AZURE_OPENAI_API_KEY;
+  const aoaiEndPoint = process.env.NEXT_PUBLIC_AZURE_OPENAI_API_ENDPOINT;
   const [koeiroParam, setKoeiroParam] = useState<KoeiroParam>(DEFAULT_PARAM);
   const [chatProcessing, setChatProcessing] = useState(false);
   const [chatLog, setChatLog] = useState<Message[]>([]);
@@ -90,7 +92,7 @@ export default function Home() {
    */
   const handleSendChat = useCallback(
     async (text: string) => {
-      if (!openAiKey) {
+      if (!aoaiKey) {
         setAssistantMessage("APIキーが入力されていません");
         return;
       }
@@ -111,12 +113,12 @@ export default function Home() {
       const messages: Message[] = [
         {
           role: "system",
-          content: systemPrompt,
+          content: systemPrompt,//ここでプロンプトを定義している
         },
         ...messageLog,
       ];
 
-      const stream = await getChatResponseStream(messages, openAiKey).catch(
+      const stream = await getChatResponseStream(messages, aoaiKey, aoaiEndPoint).catch(
         (e) => {
           console.error(e);
           return null;
@@ -194,7 +196,7 @@ export default function Home() {
       setChatLog(messageLogAssistant);
       setChatProcessing(false);
     },
-    [systemPrompt, chatLog, handleSpeakAi, openAiKey, koeiroParam]
+    [systemPrompt, chatLog, handleSpeakAi, openAiKey, koeiroParam, aoaiKey, aoaiEndPoint]
   );
 
   return (
