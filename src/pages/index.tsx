@@ -30,6 +30,7 @@ const montserrat = Montserrat({
 });
 
 export default function Home() {
+  console.log(`ep: ${process.env.NEXT_PUBLIC_AZURE_OPENAI_API_ENDPOINT}`)
   const { viewer } = useContext(ViewerContext);
 
   const [systemPrompt, setSystemPrompt] = useState(SYSTEM_PROMPT);
