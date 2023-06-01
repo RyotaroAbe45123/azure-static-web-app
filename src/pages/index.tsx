@@ -30,6 +30,7 @@ const montserrat = Montserrat({
 });
 
 export default function Home() {
+  console.log(`env: ${process.env.NAME}`)
   const { viewer } = useContext(ViewerContext);
 
   const [systemPrompt, setSystemPrompt] = useState(SYSTEM_PROMPT);
