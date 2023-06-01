@@ -63,3 +63,4 @@ ChatVRMでは返答文の音声読み上げにKoeiro APIを使用しています
 Koeiro APIの仕様や利用規約については以下のリンクや公式サイトをご確認ください。
 
 - [http://koeiromap.rinna.jp/](http://koeiromap.rinna.jp/)
+
