@@ -89,17 +89,12 @@ export const Menu = ({
 
   return (
     <>
-      <div className="absolute z-10 m-24">
+      <div className="absolute right-0 z-10 m-24">
         <div className="grid grid-flow-col gap-[8px]">
-          <IconButton
-            iconName="24/Menu"
-            label="設定"
-            isProcessing={false}
-            onClick={() => setShowSettings(true)}
-          ></IconButton>
           {showChatLog ? (
             <IconButton
               iconName="24/CommentOutline"
+              className="bg-primary bg-opacity-0"
               label="会話ログ"
               isProcessing={false}
               onClick={() => setShowChatLog(false)}
@@ -107,12 +102,20 @@ export const Menu = ({
           ) : (
             <IconButton
               iconName="24/CommentFill"
+              className="bg-primary bg-opacity-0"
               label="会話ログ"
               isProcessing={false}
               disabled={chatLog.length <= 0}
               onClick={() => setShowChatLog(true)}
             />
           )}
+          <IconButton
+            iconName="24/Menu"
+            className="bg-primary bg-opacity-0"
+            label="設定"
+            isProcessing={false}
+            onClick={() => setShowSettings(true)}
+          ></IconButton>
         </div>
       </div>
       {showChatLog && <ChatLog messages={chatLog} />}

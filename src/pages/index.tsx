@@ -208,6 +208,7 @@ export default function Home() {
         isChatProcessing={chatProcessing}
         onChatProcessStart={handleSendChat}
       />
+      <GitHubLink />
       <Menu
         openAiKey={openAiKey}
         systemPrompt={systemPrompt}
@@ -221,7 +222,6 @@ export default function Home() {
         handleClickResetChatLog={() => setChatLog([])}
         handleClickResetSystemPrompt={() => setSystemPrompt(SYSTEM_PROMPT)}
       />
-      <GitHubLink />
     </div>
   );
 }
