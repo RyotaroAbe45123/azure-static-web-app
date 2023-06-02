@@ -27,12 +27,19 @@ export class Viewer {
     this._scene = scene;
 
     // light
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.2);
     directionalLight.position.set(1.0, 1.0, 1.0).normalize();
     scene.add(directionalLight);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+    const ambientLight = new THREE.AmbientLight(0xff33ff, 0.1);
     scene.add(ambientLight);
+
+    const spotLight = new THREE.SpotLight(0xcc6633, 100, 10, Math.PI / 3, 10, 0.8);
+    spotLight.position.set( 0, 1.1, 1 );
+    spotLight.castShadow = true;
+    spotLight.shadow.mapSize.width = 1024;
+    spotLight.shadow.mapSize.height = 1024;
+    scene.add(spotLight);
 
     // animate
     this._clock = new THREE.Clock();
@@ -92,7 +99,7 @@ export class Viewer {
 
     // camera
     this._camera = new THREE.PerspectiveCamera(20.0, width / height, 0.1, 20.0);
-    this._camera.position.set(0, 1.3, 1.5);
+    this._camera.position.set(0.5, 1.3, 1.5);
     this._cameraControls?.target.set(0, 1.3, 0);
     this._cameraControls?.update();
     // camera controls
